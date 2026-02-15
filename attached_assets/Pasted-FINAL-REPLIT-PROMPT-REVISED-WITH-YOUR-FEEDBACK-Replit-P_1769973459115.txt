@@ -1,0 +1,348 @@
+FINAL REPLIT PROMPT (REVISED WITH YOUR FEEDBACK)
+Replit Prompt — RV Agents Landing Page (Agency Model)
+
+Build a modern, enterprise-grade agency-style landing page for RV Agents using Next.js + Tailwind CSS.
+
+⚠️ IMPORTANT:
+
+RV Agents is not a SaaS platform
+
+We provide custom AI agents and automation services
+
+AI agents are built and deployed on the client’s systems
+
+Do NOT add usage limits, dashboards, free trials, or hosted claims
+
+The tone should be professional, opportunity-driven, and enterprise-friendly.
+
+🌐 HEADER / NAVBAR
+
+Logo: RV Agents
+
+Menu Items:
+
+Services
+
+Use Cases
+
+Security
+
+Pricing
+
+Book a Demo
+
+Primary CTA Button: Book a Demo
+
+🦸 HERO SECTION
+
+Headline:
+Custom AI Agents Built for Your Business on Your Infrastructure
+
+Subheadline:
+We help businesses design, build, and deploy AI agents and automation workflows to improve efficiency, streamline operations, and enable smarter decision-making using modern AI tools and automation platforms.
+
+Key Points:
+
+AI agents built for real business workflows
+
+Deployed within your systems and tools
+
+Flexible, scalable, and aligned with your operations
+
+CTAs:
+
+Book a Demo
+
+Learn More
+
+❗ PROBLEM SECTION — THE CHALLENGE
+
+Title:
+Manual Processes Are Slowing Business Growth
+
+Intro:
+Businesses today are increasingly adopting AI agents to improve efficiency, structure internal communication, and manage operational data more effectively. However, many organizations still rely on manual or semi-automated workflows that limit their growth potential.
+
+Problem Points:
+
+Manual processes reduce speed and operational efficiency
+
+AI agents can streamline repetitive tasks and standard workflows
+
+Business communication and operational data need structured systems for better visibility
+
+Skilled talent spends time on repetitive work instead of high-impact initiatives
+
+Disconnected tools make it difficult to manage workflows end to end
+
+Rising operational costs create pressure on margins
+
+🛠️ WHAT WE BUILD
+
+Title:
+AI Agents and Automation That Support Your Business
+
+Intro:
+We help you identify where AI agents can add value and implement solutions that fit your workflows. Depending on your needs, we may use pre-built agent patterns or design custom workflows tailored to your business processes.
+
+Capabilities:
+
+AI Agents for Business Operations
+
+Agents designed for specific functions such as HR, sales, finance, and internal support
+
+Context-aware responses based on your data and tools
+
+Workflow Automation
+
+Step-by-step automation logic
+
+Trigger-based and conditional workflows
+
+Built using industry-standard automation platforms
+
+Sales and Lead Qualification Agents
+
+Lead interaction via chat or messaging platforms
+
+Qualification logic and CRM updates
+
+Structured handoff to sales teams
+
+HR and Internal Support Agents
+
+Policy, leave, and internal query handling
+
+Centralized interaction records for teams
+
+Finance and Accounts Support Agents
+
+Support for invoice tracking and operational finance workflows
+
+Deployed on client-controlled infrastructure
+
+Voice AI Agents
+
+Voice-based assistants and calling agents
+
+Integrated into existing business workflows
+
+🧰 TOOLS & TECHNOLOGIES WE USE
+
+Title:
+Tools and Platforms We Work With
+
+Content:
+We design and deploy AI agents using a combination of trusted AI models, automation tools, and modern development frameworks, including:
+
+ChatGPT
+
+Gemini
+
+Perplexity
+
+ElevenLabs for voice AI
+
+n8n
+
+Lindy.ai
+
+Make (Integromat)
+
+REST APIs and Webhooks
+
+JavaScript and Next.js
+
+Tool selection depends on your requirements, data sensitivity, and existing systems.
+
+🔐 SECURITY & DATA HANDLING
+
+Title:
+Security and Data Handling Considerations
+
+Content:
+We take data handling seriously and ensure that any information shared with us during implementation is treated responsibly.
+
+RV Agents does not store or resell client data
+
+AI agents are deployed within your selected tools and infrastructure
+
+Data security and compliance depend on the third-party platforms and hosting you choose
+
+Each AI model or automation platform follows its own security and compliance standards
+
+We help you design workflows that align with your internal security policies
+
+⚙️ HOW IT WORKS
+
+Title:
+Our Implementation Approach
+
+Steps:
+
+Discovery – Understand your business goals and identify suitable AI agent use cases
+
+Solution Mapping – Propose agent patterns or workflow structures based on your needs
+
+Build – Configure and integrate AI agents using selected tools and data
+
+Deploy – Implement agents within your systems and test workflows
+
+Handover – Share access, usage guidance, and documentation
+
+Optional Support – Ongoing updates and improvements via maintenance plans
+
+💰 PRICING SECTION
+
+⚠️ Pricing is implementation-based, not usage-based.
+
+Geo-Based Pricing Logic:
+
+Show INR pricing for users in India
+
+Show USD pricing for users outside India
+
+🇮🇳 India Pricing
+
+Starter — Single Agent Setup
+₹25,000 – ₹40,000 (One-Time Setup)
+
+1 AI agent
+
+Basic chat or system integration
+
+Limited workflow steps
+
+Deployment and testing
+
+Usage guidance and documentation
+
+Professional — Multi-Agent Workflow
+₹75,000 – ₹1,50,000 (One-Time Setup)
+
+3 to 5 AI agents
+
+Connected workflows and data flow
+
+Integration with internal tools
+
+Deployment, testing, and optimization
+
+14 days post-launch support
+
+Enterprise — Full Automation Stack
+Custom Pricing
+
+Department-wide automation
+
+Complex multi-agent workflows
+
+Advanced integrations
+
+Dedicated implementation and support
+
+Maintenance & Updates:
+Offered separately as a monthly service.
+
+🇺🇸 US / Global Pricing
+
+Use the same structure as India pricing with 3x–5x USD equivalents.
+
+📅 DEMO SECTION
+
+Title:
+See AI Agents in Action
+
+Content:
+Book a live demo where we:
+
+Understand your use case and requirements
+
+Showcase example AI agents and workflows
+
+Explain deployment and data handling
+
+Share timelines, scope, and next steps
+
+CTA: Book a Demo
+
+📝 DEMO FORM
+
+Fields:
+
+Name
+
+Email
+
+Company
+
+Role
+
+Brief Use Case Description
+
+Form submission should log data to the console for now.
+
+⭐ TESTIMONIALS
+
+Add placeholder testimonials with:
+
+Name
+
+Role
+
+Company
+
+Avoid fabricated metrics or certifications.
+
+❓ FAQ SECTION
+
+Include:
+
+How long does implementation take?
+
+Where are the AI agents hosted?
+
+Can we use our existing tools?
+
+Do you offer ongoing support?
+
+How is data handled during implementation?
+
+🧾 FOOTER
+
+About:
+RV Agents helps businesses implement AI agents and automation workflows to improve efficiency and operational clarity.
+
+Links:
+
+Services
+
+Use Cases
+
+Security
+
+Pricing
+
+Contact
+
+Legal:
+
+Privacy Policy
+
+Terms of Service
+
+🧑‍💻 TECH REQUIREMENTS
+
+Next.js
+
+Tailwind CSS
+
+Modular component structure
+
+SEO-friendly metadata
+
+Clean enterprise UI
+
+Ready for future backend integrations
+
+END OF PROMPT
