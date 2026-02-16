@@ -66,16 +66,41 @@ export function DemoFormModal({ open, onOpenChange }: DemoFormModalProps) {
     },
   });
 
-  const onSubmit = (data: DemoFormData) => {
+  const onSubmit = async(data: DemoFormData) => {
     console.log("Demo request submitted:", data);
-    
-    toast({
-      title: "Demo Request Received",
-      description: "Thank you! Our team will contact you within 24 hours to schedule your demo.",
-    });
 
-    form.reset();
-    onOpenChange(false);
+    try {
+      const response = await fetch(import.meta.env.VITE_SHEET_DB , {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: [
+            {
+              ...data,
+              timestamp: new Date().toLocaleString(),
+            },
+          ],    
+          sheet: "sheet1",
+        }),
+      });
+      if (!response.ok) throw new Error("Failed to submit form");
+      toast({
+        title: "Demo Request Received",
+        description: "Thank you! Our team will contact you within 24 hours to schedule your demo.",
+      });
+  
+      form.reset();
+      onOpenChange(false);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
+    
   };
 
   return (

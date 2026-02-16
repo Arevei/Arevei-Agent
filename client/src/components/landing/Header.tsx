@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
-  onBookDemo: () => void;
+  onBookDemo?: () => void;
 }
 
 const navLinks = [
@@ -50,10 +50,8 @@ export function Header({ onBookDemo }: HeaderProps) {
             className="flex items-center gap-2 text-xl font-semibold text-foreground"
             data-testid="logo-link"
           >
-            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">RV</span>
-            </div>
-            <span>RV Agents</span>
+           
+            <span>Arevei Agents</span>
           </a>
 
           <nav className="hidden lg:flex items-center gap-1" data-testid="nav-desktop">
@@ -105,7 +103,7 @@ export function Header({ onBookDemo }: HeaderProps) {
                 {link.label}
               </button>
             ))}
-            <Button
+            {onBookDemo ? <Button
               onClick={() => {
                 onBookDemo();
                 setIsMobileMenuOpen(false);
@@ -114,7 +112,7 @@ export function Header({ onBookDemo }: HeaderProps) {
               data-testid="button-book-demo-mobile"
             >
               Book a Demo
-            </Button>
+            </Button>: ""}
           </nav>
         </div>
       )}
