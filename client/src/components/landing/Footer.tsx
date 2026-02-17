@@ -48,7 +48,7 @@ export function Footer() {
               <span>Arevei Agents</span>
             </a>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs">
-              RV Agents helps businesses implement AI agents and automation 
+              Arevei Agents helps businesses implement AI agents and automation 
               workflows to improve efficiency and operational clarity.
             </p>
             <div className="flex gap-4">
@@ -147,7 +147,8 @@ export function Footer() {
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Arevei Agents Shakyawar Mediatech LLP. All rights reserved.
+            © {new Date().getFullYear()} Arevei Agents | Powered by Arevei | A Shakyawar Mediatech Venture. All Rights Reserved.
+
           </p>
           <p className="text-sm text-muted-foreground">
             AI agents built for your business, on your infrastructure.
