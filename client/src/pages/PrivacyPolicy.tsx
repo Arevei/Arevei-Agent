@@ -1,6 +1,6 @@
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
-import { Shield, Lock, Eye, Users } from "lucide-react";
+import { Shield, Lock, Eye, Users, Cookie, Settings } from "lucide-react";
 
 export default function PrivacyPolicy() {
   const sections = [
@@ -79,10 +79,52 @@ export default function PrivacyPolicy() {
     },
     {
       id: 6,
+      title: "Cookies and Similar Technologies",
+      icon: Cookie,
+      content:
+        "We use cookies and similar tracking technologies to enhance your experience on our website and analyze how you use our services.",
+      items: [
+        {
+          label: "Essential Cookies",
+          description:
+            "These cookies are necessary for the website to function properly. They enable basic functions like page navigation, authentication, and access to secure areas.",
+        },
+        {
+          label: "Analytical Cookies",
+          description:
+            "We use analytical cookies to understand how visitors use our website. These help us identify trends and improve our services and user experience.",
+        },
+        {
+          label: "Preference Cookies",
+          description:
+            "These cookies remember your preferences and settings, such as language selection, theme preferences (light/dark mode), and other customizations.",
+        },
+        {
+          label: "Marketing Cookies",
+          description:
+            "We use marketing cookies to track your activity and deliver targeted advertisements. These help us measure the effectiveness of our marketing campaigns.",
+        },
+      ],
+    },
+    {
+      id: 7,
+      title: "Your Cookie Choices",
+      icon: Settings,
+      content:
+        "You have full control over cookies and can manage your preferences at any time through your browser settings or our cookie consent banner.",
+      subsections: [
+        "Most browsers allow you to refuse cookies or alert you when a cookie is being sent.",
+        "You can also adjust cookie settings in your browser preferences at any time.",
+        "Please note that refusing certain cookies may affect the functionality and user experience of our website.",
+        "For more detailed information about cookie types, purposes, and how to control them, please visit our Cookie Policy page.",
+      ],
+    },
+    {
+      id: 8,
       title: "Contact Us",
       icon: Users,
       content:
-        "If you have questions or comments about this Privacy Policy, please contact us at:",
+        "If you have questions or comments about this Privacy Policy or our use of cookies, please contact us at:",
       subsections: [
         "Email: marketing@arevei.com",
         "Company: Arevei Agents Shakyawar Mediatech LLP",
