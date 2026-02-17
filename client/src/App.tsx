@@ -8,6 +8,7 @@ import Landing from "@/pages/landing";
 import NotFound from "@/pages/not-found";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsofService";
+import CookiePolicy from "./pages/CookiePolicy";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Landing} />
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/terms" component={TermsOfService} />
+      <Route path="/cookies" component={CookiePolicy} />
       <Route component={NotFound} />
     </Switch>
   );

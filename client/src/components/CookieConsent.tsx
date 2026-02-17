@@ -61,7 +61,7 @@ export function CookieConsent() {
                   usage. By continuing to browse, you agree to our use of
                   cookies.{" "}
                   <a
-                    href="/privacy"
+                    href="/cookies"
                     className="text-primary hover:text-primary/80 underline transition-colors"
                   >
                     Learn more
