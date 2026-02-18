@@ -19,20 +19,23 @@ interface EmailData {
   }
   
   class CRMClient {
-    private apiBase: string = "/api/crm";
+    private apiBase: string = "https://twenty.joincloud.in/rest";
   
     /**
      * Create a web form lead
      */
     async createWebFormLead(leadData: WebFormLeadData) {
       try {
-        const response = await fetch(`${this.apiBase}/webformlead`, {
+        const response = await fetch(`${this.apiBase}/webformleads`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.VITE_TWENTY_CRM_API_KEY}`,
           },
           body: JSON.stringify(leadData),
         });
+
+
   
         if (!response.ok) {
           const error = await response.json();
@@ -41,7 +44,7 @@ interface EmailData {
   
         return await response.json();
       } catch (error) {
-        console.error("[CRM Client] Error creating web form lead:", error);
+        console.error(" Error creating web form lead:", error);
         throw error;
       }
     }

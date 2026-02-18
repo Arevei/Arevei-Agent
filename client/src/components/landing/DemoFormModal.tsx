@@ -105,21 +105,12 @@ export function DemoFormModal({ open, onOpenChange }: DemoFormModalProps) {
         email: {
           primaryEmail: data.email,
         },
-        phone: data.phone
-          ? {
-              primaryPhoneNumber: data.phone,
-            }
-          : {},
         websiteSource: ['AREVEIAGENTS_COM'],
         // All remaining fields go into additionalDetails
         additionalDetails: {
           company: data.company,
           role: data.role,
           useCase: data.useCase,
-          industry: data.industry,
-          companySize: data.companySize,
-          submittedAt: new Date().toISOString(),
-          source: "areveiagents.com",
         },
       };
 
@@ -130,50 +121,21 @@ export function DemoFormModal({ open, onOpenChange }: DemoFormModalProps) {
 
       console.log("[v0] CRM Response:", result);
 
-      if (result.success) {
-        // Also backup to SheetDB if available
-        if (import.meta.env.VITE_SHEET_DB) {
-          try {
-            await fetch(import.meta.env.VITE_SHEET_DB, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                data: [
-                  {
-                    ...data,
-                    timestamp: new Date().toLocaleString(),
-                    crm_id: result.crm_id,
-                  },
-                ],
-                sheet: "sheet1",
-              }),
-            });
-            console.log("[v0] Backed up to SheetDB");
-          } catch (sheetError) {
-            console.warn("[v0] SheetDB backup failed:", sheetError);
-            // Don't fail if SheetDB backup fails
-          }
-        }
+      toast({
+        title: "Demo Request Received",
+        description:
+          "Thank you! Our team will contact you within 24 hours to schedule your demo.",
+      });
 
-        toast({
-          title: "Demo Request Received",
-          description:
-            "Thank you! Our team will contact you within 24 hours to schedule your demo.",
-        });
+      form.reset();
+      onOpenChange(false);
 
-        form.reset();
-        onOpenChange(false);
-      } else {
-        throw new Error(result.error || "Failed to create lead");
-      }
+      
     } catch (error: any) {
-      console.error("[v0] Form submission error:", error);
       toast({
         title: "Error",
         description:
-          error.message || "Something went wrong. Please try again.",
+           "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
