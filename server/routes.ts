@@ -7,7 +7,7 @@ dotenv.config();
 let crmServiceInstance: TwentyCRMService | null = null;
 function getTwentyCRMService(): TwentyCRMService {
   if (!crmServiceInstance) {
-    const apiKey = process.env.TWENTY_CRM_API_KEY;
+    const apiKey = process.env.TWENTY_CRM_API_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjODAzNTY3ZS0xNzEzLTRlN2QtOWYyMi1hNGMwYjM2ZGFiOGQiLCJ0eXBlIjoiQVBJX0tFWSIsIndvcmtzcGFjZUlkIjoiYzgwMzU2N2UtMTcxMy00ZTdkLTlmMjItYTRjMGIzNmRhYjhkIiwiaWF0IjoxNzcxMzI1NTU4LCJleHAiOjQ5MjQ5MjU1NTMsImp0aSI6ImQzOTEzOTgxLTkwNzMtNGQ1OS1iOTdlLWZhYzIwYmMyNmQwZCJ9.TeflbosvlL3TqCnB9KoCDLQFxWK9NssND3XiurZUvy0";
     if (!apiKey) {
       throw new Error(
         "TWENTY_CRM_API_KEY environment variable is not set"
