@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { crmClient } from "@/lib/crm-client";
 
 const demoFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -34,6 +36,9 @@ const demoFormSchema = z.object({
   company: z.string().min(2, "Company name must be at least 2 characters"),
   role: z.string().min(1, "Please select your role"),
   useCase: z.string().min(10, "Please describe your use case (at least 10 characters)"),
+  phone: z.string().optional(),
+  industry: z.string().optional(),
+  companySize: z.string().optional(),
 });
 
 type DemoFormData = z.infer<typeof demoFormSchema>;
@@ -52,8 +57,28 @@ const roles = [
   "Other",
 ];
 
+const industries = [
+  "Technology",
+  "Finance",
+  "Healthcare",
+  "Retail",
+  "Manufacturing",
+  "Real Estate",
+  "Consulting",
+  "Other",
+];
+
+const companySizes = [
+  "1-50",
+  "51-200",
+  "201-500",
+  "501-1000",
+  "1000+",
+];
+
 export function DemoFormModal({ open, onOpenChange }: DemoFormModalProps) {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<DemoFormData>({
     resolver: zodResolver(demoFormSchema),
@@ -63,44 +88,97 @@ export function DemoFormModal({ open, onOpenChange }: DemoFormModalProps) {
       company: "",
       role: "",
       useCase: "",
+      phone: "",
+      industry: "",
+      companySize: "",
     },
   });
 
-  const onSubmit = async(data: DemoFormData) => {
-    console.log("Demo request submitted:", data);
+  const onSubmit = async (data: DemoFormData) => {
+    setIsLoading(true);
+    console.log("[v0] Demo form submitted:", data);
 
     try {
-      const response = await fetch(import.meta.env.VITE_SHEET_DB , {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // Map form fields to CRM API
+      const crmPayload = {
+        name: data.name,
+        email: {
+          primaryEmail: data.email,
         },
-        body: JSON.stringify({
-          data: [
-            {
-              ...data,
-              timestamp: new Date().toLocaleString(),
-            },
-          ],    
-          sheet: "sheet1",
-        }),
-      });
-      if (!response.ok) throw new Error("Failed to submit form");
-      toast({
-        title: "Demo Request Received",
-        description: "Thank you! Our team will contact you within 24 hours to schedule your demo.",
-      });
-  
-      form.reset();
-      onOpenChange(false);
+        phone: data.phone
+          ? {
+              primaryPhoneNumber: data.phone,
+            }
+          : {},
+        websiteSource: ['AREVEIAGENTS_COM'],
+        // All remaining fields go into additionalDetails
+        additionalDetails: {
+          company: data.company,
+          role: data.role,
+          useCase: data.useCase,
+          industry: data.industry,
+          companySize: data.companySize,
+          submittedAt: new Date().toISOString(),
+          source: "areveiagents.com",
+        },
+      };
+
+      console.log("[v0] Sending to CRM:", crmPayload);
+
+      // Create lead in Twenty CRM
+      const result = await crmClient.createWebFormLead(crmPayload);
+
+      console.log("[v0] CRM Response:", result);
+
+      if (result.success) {
+        // Also backup to SheetDB if available
+        if (import.meta.env.VITE_SHEET_DB) {
+          try {
+            await fetch(import.meta.env.VITE_SHEET_DB, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                data: [
+                  {
+                    ...data,
+                    timestamp: new Date().toLocaleString(),
+                    crm_id: result.crm_id,
+                  },
+                ],
+                sheet: "sheet1",
+              }),
+            });
+            console.log("[v0] Backed up to SheetDB");
+          } catch (sheetError) {
+            console.warn("[v0] SheetDB backup failed:", sheetError);
+            // Don't fail if SheetDB backup fails
+          }
+        }
+
+        toast({
+          title: "Demo Request Received",
+          description:
+            "Thank you! Our team will contact you within 24 hours to schedule your demo.",
+        });
+
+        form.reset();
+        onOpenChange(false);
+      } else {
+        throw new Error(result.error || "Failed to create lead");
+      }
     } catch (error: any) {
+      console.error("[v0] Form submission error:", error);
       toast({
         title: "Error",
-        description: error.message || "Something went wrong. Please try again.",
+        description:
+          error.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
-    
   };
 
   return (
@@ -226,12 +304,96 @@ export function DemoFormModal({ open, onOpenChange }: DemoFormModalProps) {
               )}
             />
 
+            {/* <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="tel"
+                      placeholder="+1 (555) 000-0000"
+                      {...field}
+                      data-testid="input-phone"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="industry"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Industry (Optional)</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger data-testid="select-industry">
+                        <SelectValue placeholder="Select your industry" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {industries.map((industry) => (
+                        <SelectItem
+                          key={industry}
+                          value={industry}
+                          data-testid={`industry-option-${industry.toLowerCase().replace(/\s+/g, "-")}`}
+                        >
+                          {industry}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="companySize"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Company Size (Optional)</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger data-testid="select-company-size">
+                        <SelectValue placeholder="Select company size" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {companySizes.map((size) => (
+                        <SelectItem
+                          key={size}
+                          value={size}
+                          data-testid={`company-size-option-${size.replace(/\+/g, "plus").replace(/\s+/g, "-")}`}
+                        >
+                          {size} employees
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
+
             <Button
               type="submit"
+              disabled={isLoading}
               className="w-full"
               data-testid="button-submit-demo"
             >
-              Request Demo
+              {isLoading ? "Submitting..." : "Request Demo"}
             </Button>
           </form>
         </Form>
