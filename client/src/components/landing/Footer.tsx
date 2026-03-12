@@ -46,7 +46,7 @@ export function Footer() {
               className="flex items-center gap-2 text-xl font-semibold text-foreground mb-4"
               data-testid="footer-logo"
             >
-              <span>Arevei Agents</span>
+               <img src="/Logo.webp" alt="Arevei Agents Logo" />
             </a>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs">
               Arevei Agents helps businesses implement AI agents and automation 

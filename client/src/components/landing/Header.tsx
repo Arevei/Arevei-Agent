@@ -51,21 +51,11 @@ export function Header({ onBookDemo }: HeaderProps) {
             data-testid="logo-link"
           >
            
-            <span>Arevei Agents</span>
+            <span>
+              <img src="/Logo.webp" alt="Arevei Agents Logo" height={32} width={32} className="h-14 w-40"/>
+            </span>
           </a>
-
-          <nav className="hidden lg:flex items-center gap-1" data-testid="nav-desktop">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-md hover-elevate"
-                data-testid={`nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                {link.label}
-              </button>
-            ))}
-          </nav>
+         
 
           <div className="flex items-center gap-3">
             <Button
